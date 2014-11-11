@@ -2,8 +2,6 @@
 
 @import UIKit;
 
-@interface ViewController : UIViewController
-
+@interface ContactsTableViewController : UITableViewController
 
 @end
-

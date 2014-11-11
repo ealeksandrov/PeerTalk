@@ -10,14 +10,14 @@
 	<string>PeerTalk</string>
 	<key>IDESourceControlProjectOriginsDictionary</key>
 	<dict>
-		<key>D83BCED193273B3A2B6C978AB5FE006CA7C3A339</key>
+		<key>2FF360D7E5AEE32EF23514EFD2564D4475BB7728</key>
 		<string>github.com:ealeksandrov/PeerTalk.git</string>
 	</dict>
 	<key>IDESourceControlProjectPath</key>
 	<string>PeerTalk.xcworkspace</string>
 	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
 	<dict>
-		<key>D83BCED193273B3A2B6C978AB5FE006CA7C3A339</key>
+		<key>2FF360D7E5AEE32EF23514EFD2564D4475BB7728</key>
 		<string>..</string>
 	</dict>
 	<key>IDESourceControlProjectURL</key>
@@ -25,14 +25,14 @@
 	<key>IDESourceControlProjectVersion</key>
 	<integer>111</integer>
 	<key>IDESourceControlProjectWCCIdentifier</key>
-	<string>D83BCED193273B3A2B6C978AB5FE006CA7C3A339</string>
+	<string>2FF360D7E5AEE32EF23514EFD2564D4475BB7728</string>
 	<key>IDESourceControlProjectWCConfigurations</key>
 	<array>
 		<dict>
 			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
 			<string>public.vcs.git</string>
 			<key>IDESourceControlWCCIdentifierKey</key>
-			<string>D83BCED193273B3A2B6C978AB5FE006CA7C3A339</string>
+			<string>2FF360D7E5AEE32EF23514EFD2564D4475BB7728</string>
 			<key>IDESourceControlWCCName</key>
 			<string>PeerTalk</string>
 		</dict>

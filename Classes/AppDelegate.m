@@ -2,6 +2,7 @@
 
 #import "AppDelegate.h"
 #import "EALogging.h"
+#import "EARouter.h"
 
 @interface AppDelegate ()
 
@@ -17,9 +18,10 @@
     NSString *bundleVersion = [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleVersion"];
     DDLogInfo(@"Starting %@ v%@ (%@)", bundleId, bundleShortVersion, bundleVersion);
     
-    
+    self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
+    [self.window setRootViewController:[EARouter sharedInstance].rootVC];
+    [self.window makeKeyAndVisible];
     
     return YES;
 }
-
 @end
