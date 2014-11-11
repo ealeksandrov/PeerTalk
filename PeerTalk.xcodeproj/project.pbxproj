@@ -11,6 +11,7 @@
 		5540B3D11A0FF3A0003D123F /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5540B3C81A0FF3A0003D123F /* LaunchScreen.xib */; };
 		5540B3D31A0FF3A0003D123F /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 5540B3CC1A0FF3A0003D123F /* AppDelegate.m */; };
 		5540B3D91A0FF3A7003D123F /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 5540B3D71A0FF3A7003D123F /* main.m */; };
+		5569B2A91A12B9560000299C /* EAMultipeerManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 5569B2A81A12B9560000299C /* EAMultipeerManager.m */; };
 		556F13141A0FFFC90029AEF9 /* LogFormatter.m in Sources */ = {isa = PBXBuildFile; fileRef = 556F13131A0FFFC90029AEF9 /* LogFormatter.m */; };
 		556F13181A1005180029AEF9 /* EALogging.m in Sources */ = {isa = PBXBuildFile; fileRef = 556F13171A1005180029AEF9 /* EALogging.m */; };
 		55897E021A121FD200B81AD6 /* EARouter.m in Sources */ = {isa = PBXBuildFile; fileRef = 55897E011A121FD200B81AD6 /* EARouter.m */; };
@@ -29,6 +30,8 @@
 		5540B3CC1A0FF3A0003D123F /* AppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
 		5540B3D61A0FF3A7003D123F /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		5540B3D71A0FF3A7003D123F /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		5569B2A71A12B9560000299C /* EAMultipeerManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EAMultipeerManager.h; sourceTree = "<group>"; };
+		5569B2A81A12B9560000299C /* EAMultipeerManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EAMultipeerManager.m; sourceTree = "<group>"; };
 		556F13121A0FFFC90029AEF9 /* LogFormatter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LogFormatter.h; sourceTree = "<group>"; };
 		556F13131A0FFFC90029AEF9 /* LogFormatter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LogFormatter.m; sourceTree = "<group>"; };
 		556F13161A1005180029AEF9 /* EALogging.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EALogging.h; sourceTree = "<group>"; };
@@ -91,6 +94,8 @@
 				5540B3CD1A0FF3A0003D123F /* ViewControllers */,
 				55897E001A121FD200B81AD6 /* EARouter.h */,
 				55897E011A121FD200B81AD6 /* EARouter.m */,
+				5569B2A71A12B9560000299C /* EAMultipeerManager.h */,
+				5569B2A81A12B9560000299C /* EAMultipeerManager.m */,
 				5540B3CB1A0FF3A0003D123F /* AppDelegate.h */,
 				5540B3CC1A0FF3A0003D123F /* AppDelegate.m */,
 			);
@@ -274,6 +279,7 @@
 				55897E021A121FD200B81AD6 /* EARouter.m in Sources */,
 				55897E051A12438C00B81AD6 /* ContactsTableViewController.m in Sources */,
 				556F13181A1005180029AEF9 /* EALogging.m in Sources */,
+				5569B2A91A12B9560000299C /* EAMultipeerManager.m in Sources */,
 				5540B3D91A0FF3A7003D123F /* main.m in Sources */,
 				5540B3D31A0FF3A0003D123F /* AppDelegate.m in Sources */,
 				556F13141A0FFFC90029AEF9 /* LogFormatter.m in Sources */,

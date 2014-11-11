@@ -1,6 +1,7 @@
 //  Copyright (c) 2014 Evgeny Aleksandrov. All rights reserved.
 
 #import "ContactsTableViewController.h"
+#import "EAMultipeerManager.h"
 
 static NSString * const ContactCellIdentifier = @"ContactCell";
 
@@ -22,6 +23,8 @@ static NSString * const ContactCellIdentifier = @"ContactCell";
                             @1 : @"Offline"};
     
     [self.tableView registerClass:[UITableViewCell class] forCellReuseIdentifier:ContactCellIdentifier];
+    
+    [[EAMultipeerManager sharedInstance] testConnectivity];
 }
 
 #pragma mark - UITableView datasource
