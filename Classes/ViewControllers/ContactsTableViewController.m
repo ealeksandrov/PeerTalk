@@ -17,14 +17,26 @@ static NSString * const ContactCellIdentifier = @"ContactCell";
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    self.sections = @[@[@"1",@"2",@"3",@"4",@"5"],@[@"A",@"B",@"C",@"D",@"E"]];
+    self.sections = @[[EAMultipeerManager sharedInstance].discoveredItems];
     
     self.sectionHeaders = @{@0 : @"Online",
                             @1 : @"Offline"};
     
     [self.tableView registerClass:[UITableViewCell class] forCellReuseIdentifier:ContactCellIdentifier];
     
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(refreshData) name:@"PeerFound" object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(refreshData) name:@"PeerLost" object:nil];
+    
     [[EAMultipeerManager sharedInstance] testConnectivity];
+}
+
+- (void)dealloc {
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+}
+
+- (void)refreshData {
+    self.sections = @[[EAMultipeerManager sharedInstance].discoveredItems];
+    [self.tableView reloadData];
 }
 
 #pragma mark - UITableView datasource
@@ -44,9 +56,9 @@ static NSString * const ContactCellIdentifier = @"ContactCell";
 - (UITableViewCell*)tableView:(UITableView*)tableView cellForRowAtIndexPath:(NSIndexPath*)indexPath {
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:ContactCellIdentifier forIndexPath:indexPath];
     
-    NSString *item = [self itemAtIndexPath:indexPath];
+    NSDictionary *item = [self itemAtIndexPath:indexPath];
     
-    [cell.textLabel setText:item];
+    [cell.textLabel setText:[item objectForKey:@"displayName"]];
     return cell;
 }
 

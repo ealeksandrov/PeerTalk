@@ -12,5 +12,6 @@
 + (instancetype)new __attribute__((unavailable("call sharedInstance instead")));
 
 - (void)testConnectivity;
+- (NSArray *)discoveredItems;
 
 @end
