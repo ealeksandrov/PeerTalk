@@ -125,7 +125,9 @@ static NSString * const peerTalkServiceType = @"ptalk-service";
     }
     [peerIds setObject:peerID forKey:contactId];
     
-    [[NSNotificationCenter defaultCenter] postNotificationName:@"PeerFound" object:nil];
+    if(self.delegate) {
+        [self.delegate manager:self foundPeerWithId:contactId];
+    }
 }
 
 - (void)peerLostWithContactId:(NSString *)contactId {
@@ -134,7 +136,10 @@ static NSString * const peerTalkServiceType = @"ptalk-service";
     }
     [peerIds removeObjectForKey:contactId];
     [self closeSessionForContactId:contactId];
-    [[NSNotificationCenter defaultCenter] postNotificationName:@"PeerLost" object:nil];
+    
+    if(self.delegate) {
+        [self.delegate manager:self lostPeerWithId:contactId];
+    }
 }
 
 - (MCSession *)sessionForContactId:(NSString *)contactId {
@@ -164,7 +169,7 @@ static NSString * const peerTalkServiceType = @"ptalk-service";
 #pragma mark - MCSessionDelegate
 
 - (void)session:(MCSession *)session peer:(MCPeerID *)peerID didChangeState:(MCSessionState)state {
-    DDLogInfo(@"Peer changed state: %@ to %ld", peerID, state);
+    DDLogInfo(@"Peer changed state: %@ to %ld", peerID, (long)state);
     
     NSString *contactId = [self contactIdForPeer:peerID];
     if(!contactId) {
@@ -184,6 +189,10 @@ static NSString * const peerTalkServiceType = @"ptalk-service";
 - (void)session:(MCSession *)session didReceiveData:(NSData *)data fromPeer:(MCPeerID *)peerID {
     NSString *message = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
     DDLogInfo(@"Data recieved: %@", message);
+    
+    if(self.delegate) {
+        [self.delegate manager:self recievedMessage:message fromPeerWithId:[self contactIdForPeer:peerID]];
+    }
 }
 
 - (void)session:(MCSession *)session didReceiveStream:(NSInputStream *)stream withName:(NSString *)streamName fromPeer:(MCPeerID *)peerID {

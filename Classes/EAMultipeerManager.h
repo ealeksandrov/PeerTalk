@@ -3,7 +3,12 @@
 @import Foundation;
 @import MultipeerConnectivity;
 
+@protocol EAMultipeerManagerDelegate;
+
 @interface EAMultipeerManager : NSObject <MCSessionDelegate, MCNearbyServiceAdvertiserDelegate, MCNearbyServiceBrowserDelegate>
+
+@property (nonatomic, strong, readonly) NSArray *discoveredItems;
+@property (nonatomic, weak) id<EAMultipeerManagerDelegate> delegate;
 
 // singleton logic
 + (instancetype)sharedInstance;
@@ -12,6 +17,17 @@
 + (instancetype)new __attribute__((unavailable("call sharedInstance instead")));
 
 - (void)testConnectivity;
-- (NSArray *)discoveredItems;
+
+- (void)sendMessage:(NSString *)message toContactWithId:(NSString *)contactId;
+- (void)connectContactWithId:(NSString *)contactId;
+- (void)disconnectContactWithId:(NSString *)contactId;
+
+@end
+
+@protocol EAMultipeerManagerDelegate <NSObject>
+
+- (void)manager:(EAMultipeerManager *)manager foundPeerWithId:(NSString *)contactId;
+- (void)manager:(EAMultipeerManager *)manager lostPeerWithId:(NSString *)contactId;
+- (void)manager:(EAMultipeerManager *)manager recievedMessage:(NSString *)message fromPeerWithId:(NSString *)contactId;
 
 @end

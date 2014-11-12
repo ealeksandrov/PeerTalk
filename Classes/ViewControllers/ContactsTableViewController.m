@@ -1,7 +1,6 @@
 //  Copyright (c) 2014 Evgeny Aleksandrov. All rights reserved.
 
 #import "ContactsTableViewController.h"
-#import "EAMultipeerManager.h"
 
 static NSString * const ContactCellIdentifier = @"ContactCell";
 
@@ -17,6 +16,8 @@ static NSString * const ContactCellIdentifier = @"ContactCell";
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    self.title = @"PeerTalk";
+    
     self.sections = @[[EAMultipeerManager sharedInstance].discoveredItems];
     
     self.sectionHeaders = @{@0 : @"Online",
@@ -24,19 +25,24 @@ static NSString * const ContactCellIdentifier = @"ContactCell";
     
     [self.tableView registerClass:[UITableViewCell class] forCellReuseIdentifier:ContactCellIdentifier];
     
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(refreshData) name:@"PeerFound" object:nil];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(refreshData) name:@"PeerLost" object:nil];
-    
+    [[EAMultipeerManager sharedInstance] setDelegate:self];
     [[EAMultipeerManager sharedInstance] testConnectivity];
 }
 
-- (void)dealloc {
-    [[NSNotificationCenter defaultCenter] removeObserver:self];
+#pragma mark - EAMultipeerManager delegate
+
+- (void)manager:(EAMultipeerManager *)manager foundPeerWithId:(NSString *)contactId {
+    self.sections = @[manager.discoveredItems];
+    [self.tableView reloadData];
 }
 
-- (void)refreshData {
-    self.sections = @[[EAMultipeerManager sharedInstance].discoveredItems];
+- (void)manager:(EAMultipeerManager *)manager lostPeerWithId:(NSString *)contactId {
+    self.sections = @[manager.discoveredItems];
     [self.tableView reloadData];
+}
+
+- (void)manager:(EAMultipeerManager *)manager recievedMessage:(NSString *)message fromPeerWithId:(NSString *)contactId {
+    
 }
 
 #pragma mark - UITableView datasource
@@ -59,6 +65,8 @@ static NSString * const ContactCellIdentifier = @"ContactCell";
     NSDictionary *item = [self itemAtIndexPath:indexPath];
     
     [cell.textLabel setText:[item objectForKey:@"displayName"]];
+    [cell setAccessoryType:UITableViewCellAccessoryDisclosureIndicator];
+    
     return cell;
 }
 
