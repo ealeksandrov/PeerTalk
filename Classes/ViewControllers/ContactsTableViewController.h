@@ -1,8 +1,8 @@
 //  Copyright (c) 2014 Evgeny Aleksandrov. All rights reserved.
 
 @import UIKit;
-#import "EAMultipeerManager.h"
+#import "EAPostmaster.h"
 
-@interface ContactsTableViewController : UITableViewController <EAMultipeerManagerDelegate>
+@interface ContactsTableViewController : UITableViewController <EAPostmasterDelegate>
 
 @end

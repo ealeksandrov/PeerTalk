@@ -7,11 +7,12 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		550A04DB1A1415BC002385B9 /* EAMultipeerManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 550A04DA1A1415BC002385B9 /* EAMultipeerManager.m */; };
+		550A04DE1A14163E002385B9 /* EAPostmaster.m in Sources */ = {isa = PBXBuildFile; fileRef = 550A04DD1A14163E002385B9 /* EAPostmaster.m */; };
 		5540B3D01A0FF3A0003D123F /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5540B3C71A0FF3A0003D123F /* Images.xcassets */; };
 		5540B3D11A0FF3A0003D123F /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5540B3C81A0FF3A0003D123F /* LaunchScreen.xib */; };
 		5540B3D31A0FF3A0003D123F /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 5540B3CC1A0FF3A0003D123F /* AppDelegate.m */; };
 		5540B3D91A0FF3A7003D123F /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 5540B3D71A0FF3A7003D123F /* main.m */; };
-		5569B2A91A12B9560000299C /* EAMultipeerManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 5569B2A81A12B9560000299C /* EAMultipeerManager.m */; };
 		556F13141A0FFFC90029AEF9 /* LogFormatter.m in Sources */ = {isa = PBXBuildFile; fileRef = 556F13131A0FFFC90029AEF9 /* LogFormatter.m */; };
 		556F13181A1005180029AEF9 /* EALogging.m in Sources */ = {isa = PBXBuildFile; fileRef = 556F13171A1005180029AEF9 /* EALogging.m */; };
 		55897E021A121FD200B81AD6 /* EARouter.m in Sources */ = {isa = PBXBuildFile; fileRef = 55897E011A121FD200B81AD6 /* EARouter.m */; };
@@ -23,6 +24,10 @@
 /* Begin PBXFileReference section */
 		18EB1BF946EF72C8D85B10A6 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
 		4026444542E658D4521E1793 /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
+		550A04D91A1415BC002385B9 /* EAMultipeerManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EAMultipeerManager.h; sourceTree = "<group>"; };
+		550A04DA1A1415BC002385B9 /* EAMultipeerManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EAMultipeerManager.m; sourceTree = "<group>"; };
+		550A04DC1A14163E002385B9 /* EAPostmaster.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EAPostmaster.h; sourceTree = "<group>"; };
+		550A04DD1A14163E002385B9 /* EAPostmaster.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EAPostmaster.m; sourceTree = "<group>"; };
 		55136ECB1A0FF2E700DD4905 /* PeerTalk.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PeerTalk.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		5540B3C71A0FF3A0003D123F /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		5540B3C81A0FF3A0003D123F /* LaunchScreen.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LaunchScreen.xib; sourceTree = "<group>"; };
@@ -30,8 +35,6 @@
 		5540B3CC1A0FF3A0003D123F /* AppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
 		5540B3D61A0FF3A7003D123F /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		5540B3D71A0FF3A7003D123F /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
-		5569B2A71A12B9560000299C /* EAMultipeerManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EAMultipeerManager.h; sourceTree = "<group>"; };
-		5569B2A81A12B9560000299C /* EAMultipeerManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EAMultipeerManager.m; sourceTree = "<group>"; };
 		556F13121A0FFFC90029AEF9 /* LogFormatter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LogFormatter.h; sourceTree = "<group>"; };
 		556F13131A0FFFC90029AEF9 /* LogFormatter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LogFormatter.m; sourceTree = "<group>"; };
 		556F13161A1005180029AEF9 /* EALogging.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EALogging.h; sourceTree = "<group>"; };
@@ -57,6 +60,17 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		550A04D81A1415BC002385B9 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				550A04D91A1415BC002385B9 /* EAMultipeerManager.h */,
+				550A04DA1A1415BC002385B9 /* EAMultipeerManager.m */,
+				550A04DC1A14163E002385B9 /* EAPostmaster.h */,
+				550A04DD1A14163E002385B9 /* EAPostmaster.m */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
 		55136EC21A0FF2E700DD4905 = {
 			isa = PBXGroup;
 			children = (
@@ -91,11 +105,10 @@
 			isa = PBXGroup;
 			children = (
 				556F13111A0FFFC90029AEF9 /* Utils */,
+				550A04D81A1415BC002385B9 /* Model */,
 				5540B3CD1A0FF3A0003D123F /* ViewControllers */,
 				55897E001A121FD200B81AD6 /* EARouter.h */,
 				55897E011A121FD200B81AD6 /* EARouter.m */,
-				5569B2A71A12B9560000299C /* EAMultipeerManager.h */,
-				5569B2A81A12B9560000299C /* EAMultipeerManager.m */,
 				5540B3CB1A0FF3A0003D123F /* AppDelegate.h */,
 				5540B3CC1A0FF3A0003D123F /* AppDelegate.m */,
 			);
@@ -277,9 +290,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				55897E021A121FD200B81AD6 /* EARouter.m in Sources */,
+				550A04DE1A14163E002385B9 /* EAPostmaster.m in Sources */,
 				55897E051A12438C00B81AD6 /* ContactsTableViewController.m in Sources */,
 				556F13181A1005180029AEF9 /* EALogging.m in Sources */,
-				5569B2A91A12B9560000299C /* EAMultipeerManager.m in Sources */,
+				550A04DB1A1415BC002385B9 /* EAMultipeerManager.m in Sources */,
 				5540B3D91A0FF3A7003D123F /* main.m in Sources */,
 				5540B3D31A0FF3A0003D123F /* AppDelegate.m in Sources */,
 				556F13141A0FFFC90029AEF9 /* LogFormatter.m in Sources */,

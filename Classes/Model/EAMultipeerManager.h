@@ -8,6 +8,7 @@
 @interface EAMultipeerManager : NSObject <MCSessionDelegate, MCNearbyServiceAdvertiserDelegate, MCNearbyServiceBrowserDelegate>
 
 @property (nonatomic, strong, readonly) NSArray *discoveredItems;
+@property (nonatomic, strong) NSString *localContactId;
 @property (nonatomic, weak) id<EAMultipeerManagerDelegate> delegate;
 
 // singleton logic
@@ -16,7 +17,8 @@
 - (instancetype)init __attribute__((unavailable("call sharedInstance instead")));
 + (instancetype)new __attribute__((unavailable("call sharedInstance instead")));
 
-- (void)testConnectivity;
+- (void)startConnectivity;
+- (void)stopConnectivity;
 
 - (void)sendMessage:(NSString *)message toContactWithId:(NSString *)contactId;
 - (void)connectContactWithId:(NSString *)contactId;

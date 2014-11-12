@@ -39,12 +39,16 @@ static NSString * const peerTalkServiceType = @"ptalk-service";
 
 #pragma mark - Actions
 
-- (void)testConnectivity {
+- (void)startConnectivity {
+    if(!self.localContactId) {
+        DDLogError(@"Can't start networking - localContactId is nil");
+        return;
+    }
+    
     localPeerID = [[MCPeerID alloc] initWithDisplayName:[[UIDevice currentDevice] name]];
     
-    NSString *localContactId = [[NSUUID UUID] UUIDString];
     _advertiser = [[MCNearbyServiceAdvertiser alloc] initWithPeer:localPeerID
-                                                    discoveryInfo:@{@"contactId" : localContactId}
+                                                    discoveryInfo:@{@"contactId" : self.localContactId}
                                                       serviceType:peerTalkServiceType];
     _advertiser.delegate = self;
     [_advertiser startAdvertisingPeer];
@@ -52,6 +56,19 @@ static NSString * const peerTalkServiceType = @"ptalk-service";
     _browser = [[MCNearbyServiceBrowser alloc] initWithPeer:localPeerID serviceType:peerTalkServiceType];
     _browser.delegate = self;
     [_browser startBrowsingForPeers];
+}
+
+- (void)stopConnectivity {
+    [_advertiser stopAdvertisingPeer];
+    [_browser stopBrowsingForPeers];
+    
+    for (NSString *contactId in peerIds) {
+        [self closeSessionForContactId:contactId];
+    }
+    
+    localPeerID = nil;
+    _advertiser = nil;
+    _browser = nil;
 }
 
 - (void)sendMessage:(NSString *)message toContactWithId:(NSString *)contactId {
@@ -125,9 +142,7 @@ static NSString * const peerTalkServiceType = @"ptalk-service";
     }
     [peerIds setObject:peerID forKey:contactId];
     
-    if(self.delegate) {
-        [self.delegate manager:self foundPeerWithId:contactId];
-    }
+    [self.delegate manager:self foundPeerWithId:contactId];
 }
 
 - (void)peerLostWithContactId:(NSString *)contactId {
@@ -137,9 +152,7 @@ static NSString * const peerTalkServiceType = @"ptalk-service";
     [peerIds removeObjectForKey:contactId];
     [self closeSessionForContactId:contactId];
     
-    if(self.delegate) {
-        [self.delegate manager:self lostPeerWithId:contactId];
-    }
+    [self.delegate manager:self foundPeerWithId:contactId];
 }
 
 - (MCSession *)sessionForContactId:(NSString *)contactId {
@@ -190,9 +203,7 @@ static NSString * const peerTalkServiceType = @"ptalk-service";
     NSString *message = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
     DDLogInfo(@"Data recieved: %@", message);
     
-    if(self.delegate) {
-        [self.delegate manager:self recievedMessage:message fromPeerWithId:[self contactIdForPeer:peerID]];
-    }
+    [self.delegate manager:self recievedMessage:message fromPeerWithId:[self contactIdForPeer:peerID]];
 }
 
 - (void)session:(MCSession *)session didReceiveStream:(NSInputStream *)stream withName:(NSString *)streamName fromPeer:(MCPeerID *)peerID {

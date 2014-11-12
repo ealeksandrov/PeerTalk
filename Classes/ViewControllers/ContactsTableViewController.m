@@ -18,30 +18,30 @@ static NSString * const ContactCellIdentifier = @"ContactCell";
     
     self.title = @"PeerTalk";
     
-    self.sections = @[[EAMultipeerManager sharedInstance].discoveredItems];
+    self.sections = @[[EAPostmaster sharedInstance].discoveredContacts];
     
     self.sectionHeaders = @{@0 : @"Online",
                             @1 : @"Offline"};
     
     [self.tableView registerClass:[UITableViewCell class] forCellReuseIdentifier:ContactCellIdentifier];
     
-    [[EAMultipeerManager sharedInstance] setDelegate:self];
-    [[EAMultipeerManager sharedInstance] testConnectivity];
+    [[EAPostmaster sharedInstance] setDelegate:self];
+    [[EAPostmaster sharedInstance] startWorking];
 }
 
-#pragma mark - EAMultipeerManager delegate
+#pragma mark - EAPostmaster delegate
 
-- (void)manager:(EAMultipeerManager *)manager foundPeerWithId:(NSString *)contactId {
-    self.sections = @[manager.discoveredItems];
+- (void)postmaster:(EAPostmaster *)postmaster foundPeerWithId:(NSString *)contactId {
+    self.sections = @[[EAPostmaster sharedInstance].discoveredContacts];
     [self.tableView reloadData];
 }
 
-- (void)manager:(EAMultipeerManager *)manager lostPeerWithId:(NSString *)contactId {
-    self.sections = @[manager.discoveredItems];
+- (void)postmaster:(EAPostmaster *)postmaster lostPeerWithId:(NSString *)contactId {
+    self.sections = @[[EAPostmaster sharedInstance].discoveredContacts];
     [self.tableView reloadData];
 }
 
-- (void)manager:(EAMultipeerManager *)manager recievedMessage:(NSString *)message fromPeerWithId:(NSString *)contactId {
+- (void)postmaster:(EAPostmaster *)postmaster recievedMessage:(NSString *)message fromPeerWithId:(NSString *)contactId {
     
 }
 
@@ -89,15 +89,16 @@ static NSString * const ContactCellIdentifier = @"ContactCell";
 #pragma mark - UITableView delegate
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    NSInteger newSection = (indexPath.section == 0) ? 1 : 0;
+    [tableView deselectRowAtIndexPath:[tableView indexPathForSelectedRow] animated:YES];
+    
+    /*NSInteger newSection = (indexPath.section == 0) ? 1 : 0;
     NSIndexPath *newIndexPath = [NSIndexPath indexPathForRow:0 inSection:newSection];
     
     [self insertItem:[self itemAtIndexPath:indexPath] atIndexPath:newIndexPath];
     [self removeItemAtIndexPath:indexPath];
     
-#warning Disappearing separators here (iOS7 bug)
     [tableView moveRowAtIndexPath:indexPath toIndexPath:newIndexPath];
-    [tableView deselectRowAtIndexPath:[tableView indexPathForSelectedRow] animated:YES];
+    [tableView deselectRowAtIndexPath:[tableView indexPathForSelectedRow] animated:YES];*/
 }
 
 #pragma mark - Data helpers
