@@ -4,6 +4,7 @@
 
 #import "EALogging.h"
 
+NSString * const contactIdKey = @"contactId";
 NSString * const displayNameKey = @"displayName";
 static NSString * const peerTalkServiceType = @"ptalk-service";
 
@@ -50,7 +51,7 @@ static NSString * const peerTalkServiceType = @"ptalk-service";
     localPeerID = [[MCPeerID alloc] initWithDisplayName:[[UIDevice currentDevice] name]];
     
     _advertiser = [[MCNearbyServiceAdvertiser alloc] initWithPeer:localPeerID
-                                                    discoveryInfo:@{@"contactId" : self.localContactId}
+                                                    discoveryInfo:@{contactIdKey : self.localContactId}
                                                       serviceType:peerTalkServiceType];
     _advertiser.delegate = self;
     [_advertiser startAdvertisingPeer];
@@ -127,7 +128,7 @@ static NSString * const peerTalkServiceType = @"ptalk-service";
     NSMutableArray *mutableItems = [NSMutableArray arrayWithCapacity:[peerIds count]];
     for (NSString *contactId in peerIds) {
         MCPeerID *peerID = [peerIds objectForKey:contactId];
-        [mutableItems addObject:@{@"contactId" : contactId, displayNameKey : peerID.displayName}];
+        [mutableItems addObject:@{contactIdKey : contactId, displayNameKey : peerID.displayName}];
     }
     return [mutableItems copy];
 }
@@ -154,7 +155,7 @@ static NSString * const peerTalkServiceType = @"ptalk-service";
     [peerIds removeObjectForKey:contactId];
     [self closeSessionForContactId:contactId];
     
-    [self.delegate manager:self foundPeerWithId:contactId];
+    [self.delegate manager:self lostPeerWithId:contactId];
 }
 
 - (MCSession *)sessionForContactId:(NSString *)contactId {
@@ -243,7 +244,7 @@ static NSString * const peerTalkServiceType = @"ptalk-service";
 #pragma mark MCNearbyServiceBrowserDelegate
 
 - (void)browser:(MCNearbyServiceBrowser *)browser foundPeer:(MCPeerID *)peerID withDiscoveryInfo:(NSDictionary *)info {
-    NSString *contactId = info[@"contactId"];
+    NSString *contactId = info[contactIdKey];
     if (!contactId) {
         return;
     }

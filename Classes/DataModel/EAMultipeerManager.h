@@ -5,6 +5,7 @@
 
 @protocol EAMultipeerManagerDelegate;
 
+extern NSString * const contactIdKey;
 extern NSString * const displayNameKey;
 
 @interface EAMultipeerManager : NSObject <MCSessionDelegate, MCNearbyServiceAdvertiserDelegate, MCNearbyServiceBrowserDelegate>

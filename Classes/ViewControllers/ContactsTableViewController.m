@@ -1,6 +1,9 @@
 //  Copyright (c) 2014 Evgeny Aleksandrov. All rights reserved.
 
 #import "ContactsTableViewController.h"
+#import "EALogging.h"
+
+#import "EAContact.h"
 
 static NSString * const ContactCellIdentifier = @"ContactCell";
 
@@ -18,7 +21,7 @@ static NSString * const ContactCellIdentifier = @"ContactCell";
     
     self.title = @"PeerTalk";
     
-    self.sections = @[[EAPostmaster sharedInstance].discoveredContacts];
+    self.sections = @[[EAPostmaster sharedInstance].onlineContacts,[EAPostmaster sharedInstance].offlineContacts];
     
     self.sectionHeaders = @{@0 : @"Online",
                             @1 : @"Offline"};
@@ -31,17 +34,37 @@ static NSString * const ContactCellIdentifier = @"ContactCell";
 
 #pragma mark - EAPostmaster delegate
 
-- (void)postmaster:(EAPostmaster *)postmaster foundPeerWithId:(NSString *)contactId {
-    self.sections = @[[EAPostmaster sharedInstance].discoveredContacts];
-    [self.tableView reloadData];
+- (void)postmaster:(EAPostmaster *)postmaster foundPeer:(EAContact *)contact {
+    if([self.sections[1] containsObject:contact]) {
+        NSIndexPath *indexPathFrom = [NSIndexPath indexPathForRow:[self.sections[1] indexOfObject:contact] inSection:1];
+        self.sections = @[[EAPostmaster sharedInstance].onlineContacts,[EAPostmaster sharedInstance].offlineContacts];
+        NSIndexPath *indexPathTo = [NSIndexPath indexPathForRow:[self.sections[0] indexOfObject:contact] inSection:0];
+        
+        [self.tableView moveRowAtIndexPath:indexPathFrom toIndexPath:indexPathTo];
+    } else {
+        self.sections = @[[EAPostmaster sharedInstance].onlineContacts,[EAPostmaster sharedInstance].offlineContacts];
+        NSIndexPath *indexPathTo = [NSIndexPath indexPathForRow:[self.sections[0] indexOfObject:contact] inSection:0];
+        
+        [self.tableView insertRowsAtIndexPaths:@[indexPathTo] withRowAnimation:UITableViewRowAnimationAutomatic];
+    }
 }
 
-- (void)postmaster:(EAPostmaster *)postmaster lostPeerWithId:(NSString *)contactId {
-    self.sections = @[[EAPostmaster sharedInstance].discoveredContacts];
-    [self.tableView reloadData];
+- (void)postmaster:(EAPostmaster *)postmaster lostPeer:(EAContact *)contact {
+    if([self.sections[0] containsObject:contact]) {
+        NSIndexPath *indexPathFrom = [NSIndexPath indexPathForRow:[self.sections[0] indexOfObject:contact] inSection:0];
+        self.sections = @[[EAPostmaster sharedInstance].onlineContacts,[EAPostmaster sharedInstance].offlineContacts];
+        NSIndexPath *indexPathTo = [NSIndexPath indexPathForRow:[self.sections[1] indexOfObject:contact] inSection:1];
+        
+        [self.tableView moveRowAtIndexPath:indexPathFrom toIndexPath:indexPathTo];
+    } else {
+        self.sections = @[[EAPostmaster sharedInstance].onlineContacts,[EAPostmaster sharedInstance].offlineContacts];
+        NSIndexPath *indexPathTo = [NSIndexPath indexPathForRow:[self.sections[1] indexOfObject:contact] inSection:0];
+        
+        [self.tableView insertRowsAtIndexPaths:@[indexPathTo] withRowAnimation:UITableViewRowAnimationAutomatic];
+    }
 }
 
-- (void)postmaster:(EAPostmaster *)postmaster recievedMessage:(NSString *)message fromPeerWithId:(NSString *)contactId {
+- (void)postmaster:(EAPostmaster *)postmaster recievedMessage:(NSString *)message fromPeer:(EAContact *)contact {
     
 }
 
@@ -62,9 +85,9 @@ static NSString * const ContactCellIdentifier = @"ContactCell";
 - (UITableViewCell*)tableView:(UITableView*)tableView cellForRowAtIndexPath:(NSIndexPath*)indexPath {
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:ContactCellIdentifier forIndexPath:indexPath];
     
-    NSDictionary *item = [self itemAtIndexPath:indexPath];
+    EAContact *item = [self itemAtIndexPath:indexPath];
     
-    [cell.textLabel setText:[item objectForKey:displayNameKey]];
+    [cell.textLabel setText:item.displayName];
     [cell setAccessoryType:UITableViewCellAccessoryDisclosureIndicator];
     
     return cell;
@@ -80,8 +103,8 @@ static NSString * const ContactCellIdentifier = @"ContactCell";
 
 - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
     if (editingStyle == UITableViewCellEditingStyleDelete) {
-        [self removeItemAtIndexPath:indexPath];
-        
+        [[EAPostmaster sharedInstance] deleteContact:[self itemAtIndexPath:indexPath]];
+        self.sections = @[[EAPostmaster sharedInstance].onlineContacts,[EAPostmaster sharedInstance].offlineContacts];
         [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
     }
 }
@@ -90,39 +113,12 @@ static NSString * const ContactCellIdentifier = @"ContactCell";
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     [tableView deselectRowAtIndexPath:[tableView indexPathForSelectedRow] animated:YES];
-    
-    /*NSInteger newSection = (indexPath.section == 0) ? 1 : 0;
-    NSIndexPath *newIndexPath = [NSIndexPath indexPathForRow:0 inSection:newSection];
-    
-    [self insertItem:[self itemAtIndexPath:indexPath] atIndexPath:newIndexPath];
-    [self removeItemAtIndexPath:indexPath];
-    
-    [tableView moveRowAtIndexPath:indexPath toIndexPath:newIndexPath];
-    [tableView deselectRowAtIndexPath:[tableView indexPathForSelectedRow] animated:YES];*/
 }
 
 #pragma mark - Data helpers
 
 - (id)itemAtIndexPath:(NSIndexPath *)indexPath {
     return self.sections[indexPath.section][indexPath.row];
-}
-
-- (void)removeItemAtIndexPath:(NSIndexPath *)indexPath {
-    NSMutableArray *tempArray = [self.sections[indexPath.section] mutableCopy];
-    NSMutableArray *tempSections = [self.sections mutableCopy];
-    
-    [tempArray removeObjectAtIndex:indexPath.row];
-    tempSections[indexPath.section] = [tempArray copy];
-    self.sections = [tempSections copy];
-}
-
-- (void)insertItem:(id)item atIndexPath:(NSIndexPath *)indexPath {
-    NSMutableArray *tempArray = [self.sections[indexPath.section] mutableCopy];
-    NSMutableArray *tempSections = [self.sections mutableCopy];
-    
-    [tempArray insertObject:item atIndex:indexPath.row];
-    tempSections[indexPath.section] = [tempArray copy];
-    self.sections = [tempSections copy];
 }
 
 @end
