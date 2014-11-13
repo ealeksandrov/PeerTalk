@@ -1,6 +1,9 @@
 //  Copyright (c) 2014 Evgeny Aleksandrov. All rights reserved.
 
 #import "EAPostmaster.h"
+#import <MagicalRecord/MagicalRecord.h>
+
+static NSString * const localContactIdKey = @"localContactId";
 
 @interface EAPostmaster ()
 
@@ -23,16 +26,19 @@
 }
 
 - (instancetype)initUniqueInstance {
-    self.localContactId = [[NSUserDefaults standardUserDefaults] valueForKey:@"localContactId"];
+    self.localContactId = [[NSUserDefaults standardUserDefaults] valueForKey:localContactIdKey];
     if(!self.localContactId) {
         self.localContactId = [[NSUUID UUID] UUIDString];
-        [[NSUserDefaults standardUserDefaults] setValue:self.localContactId forKey:@"localContactId"];
+        [[NSUserDefaults standardUserDefaults] setValue:self.localContactId forKey:localContactIdKey];
         [[NSUserDefaults standardUserDefaults] synchronize];
     }
     
     self.manager = [EAMultipeerManager sharedInstance];
     self.manager.localContactId = self.localContactId;
     self.manager.delegate = self;
+    
+    [MagicalRecord setLoggingLevel:MagicalRecordLoggingLevelVerbose];
+    [MagicalRecord setupAutoMigratingStack];
     
     return [super init];
 }
@@ -49,6 +55,12 @@
 
 - (NSArray *)discoveredContacts {
     return [self.manager.discoveredItems copy];
+}
+
+#pragma mark - 
+
+- (void)sendMessage:(NSString *)messageStr toContactWithId:(NSString *)contactId {
+    
 }
 
 #pragma mark - EAMultipeerManager delegate

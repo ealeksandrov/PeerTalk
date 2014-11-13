@@ -5,6 +5,8 @@
 
 @protocol EAMultipeerManagerDelegate;
 
+extern NSString * const displayNameKey;
+
 @interface EAMultipeerManager : NSObject <MCSessionDelegate, MCNearbyServiceAdvertiserDelegate, MCNearbyServiceBrowserDelegate>
 
 @property (nonatomic, strong, readonly) NSArray *discoveredItems;

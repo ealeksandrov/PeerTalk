@@ -7,8 +7,13 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		550A04DB1A1415BC002385B9 /* EAMultipeerManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 550A04DA1A1415BC002385B9 /* EAMultipeerManager.m */; };
-		550A04DE1A14163E002385B9 /* EAPostmaster.m in Sources */ = {isa = PBXBuildFile; fileRef = 550A04DD1A14163E002385B9 /* EAPostmaster.m */; };
+		55270FE11A14DA4D00FAF67F /* EAMultipeerManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 55270FDE1A14DA4D00FAF67F /* EAMultipeerManager.m */; };
+		55270FE21A14DA4D00FAF67F /* EAPostmaster.m in Sources */ = {isa = PBXBuildFile; fileRef = 55270FE01A14DA4D00FAF67F /* EAPostmaster.m */; };
+		55270FEF1A14E47500FAF67F /* Model.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 55270FED1A14E47500FAF67F /* Model.xcdatamodeld */; };
+		55270FFA1A14E48700FAF67F /* EAContact.m in Sources */ = {isa = PBXBuildFile; fileRef = 55270FF21A14E48700FAF67F /* EAContact.m */; };
+		55270FFB1A14E48700FAF67F /* EAMessage.m in Sources */ = {isa = PBXBuildFile; fileRef = 55270FF41A14E48700FAF67F /* EAMessage.m */; };
+		55270FFC1A14E48700FAF67F /* _EAContact.m in Sources */ = {isa = PBXBuildFile; fileRef = 55270FF71A14E48700FAF67F /* _EAContact.m */; };
+		55270FFD1A14E48700FAF67F /* _EAMessage.m in Sources */ = {isa = PBXBuildFile; fileRef = 55270FF91A14E48700FAF67F /* _EAMessage.m */; };
 		5540B3D01A0FF3A0003D123F /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5540B3C71A0FF3A0003D123F /* Images.xcassets */; };
 		5540B3D11A0FF3A0003D123F /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5540B3C81A0FF3A0003D123F /* LaunchScreen.xib */; };
 		5540B3D31A0FF3A0003D123F /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 5540B3CC1A0FF3A0003D123F /* AppDelegate.m */; };
@@ -17,18 +22,51 @@
 		556F13181A1005180029AEF9 /* EALogging.m in Sources */ = {isa = PBXBuildFile; fileRef = 556F13171A1005180029AEF9 /* EALogging.m */; };
 		55897E021A121FD200B81AD6 /* EARouter.m in Sources */ = {isa = PBXBuildFile; fileRef = 55897E011A121FD200B81AD6 /* EARouter.m */; };
 		55897E051A12438C00B81AD6 /* ContactsTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 55897E041A12438C00B81AD6 /* ContactsTableViewController.m */; };
-		55D9BA401A0FF69E00A45DBF /* autoupdate-revision.sh in Resources */ = {isa = PBXBuildFile; fileRef = 55D9BA3F1A0FF69E00A45DBF /* autoupdate-revision.sh */; };
 		ABE2F73730BC582A2BADD67E /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C86B0F406058662A58BF3EA3 /* libPods.a */; };
 /* End PBXBuildFile section */
+
+/* Begin PBXBuildRule section */
+		55270FEA1A14E27E00FAF67F /* PBXBuildRule */ = {
+			isa = PBXBuildRule;
+			compilerSpec = com.apple.compilers.proxy.script;
+			fileType = wrapper.xcdatamodeld;
+			isEditable = 1;
+			outputFiles = (
+				"$(DERIVED_FILE_DIR)/$(INPUT_FILE_BASE).momd",
+			);
+			script = "echo \"Running mogend\"\n\"${SRCROOT}/Scripts/mogend.sh\"";
+		};
+		55270FEB1A14E2A900FAF67F /* PBXBuildRule */ = {
+			isa = PBXBuildRule;
+			compilerSpec = com.apple.compilers.proxy.script;
+			fileType = wrapper.xcdatamodel;
+			isEditable = 1;
+			outputFiles = (
+				"$(DERIVED_FILE_DIR)/$(INPUT_FILE_BASE).mom",
+			);
+			script = "echo \"Running mogen\"\n\"${SRCROOT}/Scripts/mogen.sh\"";
+		};
+/* End PBXBuildRule section */
 
 /* Begin PBXFileReference section */
 		18EB1BF946EF72C8D85B10A6 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
 		4026444542E658D4521E1793 /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
-		550A04D91A1415BC002385B9 /* EAMultipeerManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EAMultipeerManager.h; sourceTree = "<group>"; };
-		550A04DA1A1415BC002385B9 /* EAMultipeerManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EAMultipeerManager.m; sourceTree = "<group>"; };
-		550A04DC1A14163E002385B9 /* EAPostmaster.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EAPostmaster.h; sourceTree = "<group>"; };
-		550A04DD1A14163E002385B9 /* EAPostmaster.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EAPostmaster.m; sourceTree = "<group>"; };
 		55136ECB1A0FF2E700DD4905 /* PeerTalk.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PeerTalk.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		55270FDD1A14DA4D00FAF67F /* EAMultipeerManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EAMultipeerManager.h; sourceTree = "<group>"; };
+		55270FDE1A14DA4D00FAF67F /* EAMultipeerManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EAMultipeerManager.m; sourceTree = "<group>"; };
+		55270FDF1A14DA4D00FAF67F /* EAPostmaster.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EAPostmaster.h; sourceTree = "<group>"; };
+		55270FE01A14DA4D00FAF67F /* EAPostmaster.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EAPostmaster.m; sourceTree = "<group>"; };
+		55270FE61A14E26700FAF67F /* mogen.sh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.sh; path = mogen.sh; sourceTree = "<group>"; };
+		55270FE71A14E26700FAF67F /* mogend.sh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.sh; path = mogend.sh; sourceTree = "<group>"; };
+		55270FEE1A14E47500FAF67F /* Model.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Model.xcdatamodel; sourceTree = "<group>"; };
+		55270FF11A14E48700FAF67F /* EAContact.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EAContact.h; sourceTree = "<group>"; };
+		55270FF21A14E48700FAF67F /* EAContact.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EAContact.m; sourceTree = "<group>"; };
+		55270FF31A14E48700FAF67F /* EAMessage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EAMessage.h; sourceTree = "<group>"; };
+		55270FF41A14E48700FAF67F /* EAMessage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EAMessage.m; sourceTree = "<group>"; };
+		55270FF61A14E48700FAF67F /* _EAContact.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = _EAContact.h; sourceTree = "<group>"; };
+		55270FF71A14E48700FAF67F /* _EAContact.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = _EAContact.m; sourceTree = "<group>"; };
+		55270FF81A14E48700FAF67F /* _EAMessage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = _EAMessage.h; sourceTree = "<group>"; };
+		55270FF91A14E48700FAF67F /* _EAMessage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = _EAMessage.m; sourceTree = "<group>"; };
 		5540B3C71A0FF3A0003D123F /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		5540B3C81A0FF3A0003D123F /* LaunchScreen.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LaunchScreen.xib; sourceTree = "<group>"; };
 		5540B3CB1A0FF3A0003D123F /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -60,17 +98,6 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		550A04D81A1415BC002385B9 /* Model */ = {
-			isa = PBXGroup;
-			children = (
-				550A04D91A1415BC002385B9 /* EAMultipeerManager.h */,
-				550A04DA1A1415BC002385B9 /* EAMultipeerManager.m */,
-				550A04DC1A14163E002385B9 /* EAPostmaster.h */,
-				550A04DD1A14163E002385B9 /* EAPostmaster.m */,
-			);
-			path = Model;
-			sourceTree = "<group>";
-		};
 		55136EC21A0FF2E700DD4905 = {
 			isa = PBXGroup;
 			children = (
@@ -92,6 +119,42 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
+		55270FDC1A14DA4D00FAF67F /* DataModel */ = {
+			isa = PBXGroup;
+			children = (
+				55270FED1A14E47500FAF67F /* Model.xcdatamodeld */,
+				55270FF01A14E48700FAF67F /* CoreDataModels */,
+				55270FDD1A14DA4D00FAF67F /* EAMultipeerManager.h */,
+				55270FDE1A14DA4D00FAF67F /* EAMultipeerManager.m */,
+				55270FDF1A14DA4D00FAF67F /* EAPostmaster.h */,
+				55270FE01A14DA4D00FAF67F /* EAPostmaster.m */,
+			);
+			path = DataModel;
+			sourceTree = "<group>";
+		};
+		55270FF01A14E48700FAF67F /* CoreDataModels */ = {
+			isa = PBXGroup;
+			children = (
+				55270FF51A14E48700FAF67F /* Private */,
+				55270FF11A14E48700FAF67F /* EAContact.h */,
+				55270FF21A14E48700FAF67F /* EAContact.m */,
+				55270FF31A14E48700FAF67F /* EAMessage.h */,
+				55270FF41A14E48700FAF67F /* EAMessage.m */,
+			);
+			path = CoreDataModels;
+			sourceTree = "<group>";
+		};
+		55270FF51A14E48700FAF67F /* Private */ = {
+			isa = PBXGroup;
+			children = (
+				55270FF61A14E48700FAF67F /* _EAContact.h */,
+				55270FF71A14E48700FAF67F /* _EAContact.m */,
+				55270FF81A14E48700FAF67F /* _EAMessage.h */,
+				55270FF91A14E48700FAF67F /* _EAMessage.m */,
+			);
+			path = Private;
+			sourceTree = "<group>";
+		};
 		5540B3C61A0FF3A0003D123F /* Assets */ = {
 			isa = PBXGroup;
 			children = (
@@ -105,7 +168,7 @@
 			isa = PBXGroup;
 			children = (
 				556F13111A0FFFC90029AEF9 /* Utils */,
-				550A04D81A1415BC002385B9 /* Model */,
+				55270FDC1A14DA4D00FAF67F /* DataModel */,
 				5540B3CD1A0FF3A0003D123F /* ViewControllers */,
 				55897E001A121FD200B81AD6 /* EARouter.h */,
 				55897E011A121FD200B81AD6 /* EARouter.m */,
@@ -149,6 +212,8 @@
 			isa = PBXGroup;
 			children = (
 				55D9BA3F1A0FF69E00A45DBF /* autoupdate-revision.sh */,
+				55270FE61A14E26700FAF67F /* mogen.sh */,
+				55270FE71A14E26700FAF67F /* mogend.sh */,
 			);
 			path = Scripts;
 			sourceTree = "<group>";
@@ -185,6 +250,8 @@
 				CC1D9DF85BA1C68D2A251AB3 /* Copy Pods Resources */,
 			);
 			buildRules = (
+				55270FEB1A14E2A900FAF67F /* PBXBuildRule */,
+				55270FEA1A14E27E00FAF67F /* PBXBuildRule */,
 			);
 			dependencies = (
 			);
@@ -232,7 +299,6 @@
 			files = (
 				5540B3D11A0FF3A0003D123F /* LaunchScreen.xib in Resources */,
 				5540B3D01A0FF3A0003D123F /* Images.xcassets in Resources */,
-				55D9BA401A0FF69E00A45DBF /* autoupdate-revision.sh in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -290,10 +356,15 @@
 			buildActionMask = 2147483647;
 			files = (
 				55897E021A121FD200B81AD6 /* EARouter.m in Sources */,
-				550A04DE1A14163E002385B9 /* EAPostmaster.m in Sources */,
+				55270FE21A14DA4D00FAF67F /* EAPostmaster.m in Sources */,
 				55897E051A12438C00B81AD6 /* ContactsTableViewController.m in Sources */,
 				556F13181A1005180029AEF9 /* EALogging.m in Sources */,
-				550A04DB1A1415BC002385B9 /* EAMultipeerManager.m in Sources */,
+				55270FFC1A14E48700FAF67F /* _EAContact.m in Sources */,
+				55270FFA1A14E48700FAF67F /* EAContact.m in Sources */,
+				55270FFB1A14E48700FAF67F /* EAMessage.m in Sources */,
+				55270FE11A14DA4D00FAF67F /* EAMultipeerManager.m in Sources */,
+				55270FFD1A14E48700FAF67F /* _EAMessage.m in Sources */,
+				55270FEF1A14E47500FAF67F /* Model.xcdatamodeld in Sources */,
 				5540B3D91A0FF3A7003D123F /* main.m in Sources */,
 				5540B3D31A0FF3A0003D123F /* AppDelegate.m in Sources */,
 				556F13141A0FFFC90029AEF9 /* LogFormatter.m in Sources */,
@@ -437,6 +508,19 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		55270FED1A14E47500FAF67F /* Model.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				55270FEE1A14E47500FAF67F /* Model.xcdatamodel */,
+			);
+			currentVersion = 55270FEE1A14E47500FAF67F /* Model.xcdatamodel */;
+			path = Model.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = 55136EC31A0FF2E700DD4905 /* Project object */;
 }

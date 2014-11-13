@@ -1,8 +1,10 @@
 //  Copyright (c) 2014 Evgeny Aleksandrov. All rights reserved.
 
 #import "EAMultipeerManager.h"
+
 #import "EALogging.h"
 
+NSString * const displayNameKey = @"displayName";
 static NSString * const peerTalkServiceType = @"ptalk-service";
 
 @interface EAMultipeerManager () {
@@ -125,7 +127,7 @@ static NSString * const peerTalkServiceType = @"ptalk-service";
     NSMutableArray *mutableItems = [NSMutableArray arrayWithCapacity:[peerIds count]];
     for (NSString *contactId in peerIds) {
         MCPeerID *peerID = [peerIds objectForKey:contactId];
-        [mutableItems addObject:@{@"contactId" : contactId, @"displayName" : peerID.displayName}];
+        [mutableItems addObject:@{@"contactId" : contactId, displayNameKey : peerID.displayName}];
     }
     return [mutableItems copy];
 }

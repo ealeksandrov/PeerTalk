@@ -64,7 +64,7 @@ static NSString * const ContactCellIdentifier = @"ContactCell";
     
     NSDictionary *item = [self itemAtIndexPath:indexPath];
     
-    [cell.textLabel setText:[item objectForKey:@"displayName"]];
+    [cell.textLabel setText:[item objectForKey:displayNameKey]];
     [cell setAccessoryType:UITableViewCellAccessoryDisclosureIndicator];
     
     return cell;
