@@ -7,12 +7,16 @@ PODS:
     - CocoaLumberjack/Core
   - CocoaLumberjack/Extensions (2.0.0-beta4):
     - CocoaLumberjack/Default
-  - MagicalRecord (3.0.0.dev.1415883009):
+  - JSQMessagesViewController (6.0.0):
+    - JSQSystemSoundPlayer (~> 2.0.0)
+  - JSQSystemSoundPlayer (2.0.0)
+  - MagicalRecord (3.0.0.dev.1415915176):
     - MagicalRecord/Core
-  - MagicalRecord/Core (3.0.0.dev.1415883009)
+  - MagicalRecord/Core (3.0.0.dev.1415915176)
 
 DEPENDENCIES:
   - CocoaLumberjack
+  - JSQMessagesViewController
   - MagicalRecord (from `https://github.com/magicalpanda/MagicalRecord.git`, branch `release/3.0`)
 
 EXTERNAL SOURCES:
@@ -22,6 +26,8 @@ EXTERNAL SOURCES:
 
 SPEC CHECKSUMS:
   CocoaLumberjack: 24153b24b17d853d7182b22b128971fb98e8cb18
+  JSQMessagesViewController: 61c8defbe86f3859f796146f082f8231dad8de66
+  JSQSystemSoundPlayer: c98443b1cbb3b45db09d0d3d6c2355cf78294981
   MagicalRecord: 1108009980499d6f370a373c16afb1f52635fde8
 
 COCOAPODS: 0.34.4

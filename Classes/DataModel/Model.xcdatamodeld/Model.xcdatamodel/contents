@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<model userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="6252" systemVersion="14A389" minimumToolsVersion="Xcode 4.3" macOSVersion="Automatic" iOSVersion="Automatic">
+<model userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="6252" systemVersion="14B17" minimumToolsVersion="Xcode 4.3" macOSVersion="Automatic" iOSVersion="Automatic">
     <entity name="EAContact" representedClassName="EAContact" syncable="YES">
         <attribute name="contactId" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="displayName" optional="YES" attributeType="String" syncable="YES"/>
@@ -9,12 +9,13 @@
     </entity>
     <entity name="EAMessage" representedClassName="EAMessage" syncable="YES">
         <attribute name="isRecieved" optional="YES" attributeType="Boolean" syncable="YES"/>
+        <attribute name="message" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="messageId" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="time" optional="YES" attributeType="Date" syncable="YES"/>
         <relationship name="contact" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="EAContact" inverseName="messages" inverseEntity="EAContact" syncable="YES"/>
     </entity>
     <elements>
         <element name="EAContact" positionX="-63" positionY="-18" width="128" height="118"/>
-        <element name="EAMessage" positionX="-54" positionY="-9" width="128" height="103"/>
+        <element name="EAMessage" positionX="-54" positionY="-9" width="128" height="120"/>
     </elements>
 </model>

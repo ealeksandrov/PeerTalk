@@ -2,6 +2,7 @@
 
 #import "ContactsTableViewController.h"
 #import "EALogging.h"
+#import "EARouter.h"
 
 #import "EAContact.h"
 
@@ -112,7 +113,8 @@ static NSString * const ContactCellIdentifier = @"ContactCell";
 #pragma mark - UITableView delegate
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    [tableView deselectRowAtIndexPath:[tableView indexPathForSelectedRow] animated:YES];
+    //[tableView deselectRowAtIndexPath:[tableView indexPathForSelectedRow] animated:YES];
+    [[EARouter sharedInstance] openContact:[self itemAtIndexPath:indexPath]];
 }
 
 #pragma mark - Data helpers

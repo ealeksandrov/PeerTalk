@@ -5,6 +5,7 @@
 
 const struct EAMessageAttributes EAMessageAttributes = {
 	.isRecieved = @"isRecieved",
+	.message = @"message",
 	.messageId = @"messageId",
 	.time = @"time",
 };
@@ -67,6 +68,8 @@ const struct EAMessageRelationships EAMessageRelationships = {
 - (void)setPrimitiveIsRecievedValue:(BOOL)value_ {
 	[self setPrimitiveIsRecieved:[NSNumber numberWithBool:value_]];
 }
+
+@dynamic message;
 
 @dynamic messageId;
 

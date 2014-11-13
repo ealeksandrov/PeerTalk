@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		5515D2581A155ECA0037523D /* MessagesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5515D2571A155ECA0037523D /* MessagesViewController.m */; };
 		55270FE11A14DA4D00FAF67F /* EAMultipeerManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 55270FDE1A14DA4D00FAF67F /* EAMultipeerManager.m */; };
 		55270FE21A14DA4D00FAF67F /* EAPostmaster.m in Sources */ = {isa = PBXBuildFile; fileRef = 55270FE01A14DA4D00FAF67F /* EAPostmaster.m */; };
 		55270FEF1A14E47500FAF67F /* Model.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 55270FED1A14E47500FAF67F /* Model.xcdatamodeld */; };
@@ -52,6 +53,8 @@
 		18EB1BF946EF72C8D85B10A6 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
 		4026444542E658D4521E1793 /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
 		55136ECB1A0FF2E700DD4905 /* PeerTalk.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PeerTalk.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		5515D2561A155ECA0037523D /* MessagesViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MessagesViewController.h; sourceTree = "<group>"; };
+		5515D2571A155ECA0037523D /* MessagesViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MessagesViewController.m; sourceTree = "<group>"; };
 		55270FDD1A14DA4D00FAF67F /* EAMultipeerManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EAMultipeerManager.h; sourceTree = "<group>"; };
 		55270FDE1A14DA4D00FAF67F /* EAMultipeerManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EAMultipeerManager.m; sourceTree = "<group>"; };
 		55270FDF1A14DA4D00FAF67F /* EAPostmaster.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EAPostmaster.h; sourceTree = "<group>"; };
@@ -183,6 +186,8 @@
 			children = (
 				55897E031A12438C00B81AD6 /* ContactsTableViewController.h */,
 				55897E041A12438C00B81AD6 /* ContactsTableViewController.m */,
+				5515D2561A155ECA0037523D /* MessagesViewController.h */,
+				5515D2571A155ECA0037523D /* MessagesViewController.m */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -361,6 +366,7 @@
 				556F13181A1005180029AEF9 /* EALogging.m in Sources */,
 				55270FFC1A14E48700FAF67F /* _EAContact.m in Sources */,
 				55270FFA1A14E48700FAF67F /* EAContact.m in Sources */,
+				5515D2581A155ECA0037523D /* MessagesViewController.m in Sources */,
 				55270FFB1A14E48700FAF67F /* EAMessage.m in Sources */,
 				55270FE11A14DA4D00FAF67F /* EAMultipeerManager.m in Sources */,
 				55270FFD1A14E48700FAF67F /* _EAMessage.m in Sources */,

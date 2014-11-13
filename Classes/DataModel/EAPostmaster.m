@@ -45,9 +45,6 @@ static NSString * const localContactIdKey = @"localContactId";
     [MagicalRecord setLoggingLevel:MagicalRecordLoggingLevelVerbose];
     [MagicalRecord setupAutoMigratingStack];
     
-    
-    NSLog(@"%@",[EAContact MR_findAll]);
-    
     return [super init];
 }
 

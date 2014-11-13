@@ -24,8 +24,7 @@
 - (void)setupRootVC {
     self.masterVC = [[ContactsTableViewController alloc] initWithStyle:UITableViewStylePlain];
     
-    self.detailVC = [[UIViewController alloc] init];
-    self.detailVC.view.backgroundColor = [UIColor greenColor];
+    self.detailVC = [[MessagesViewController alloc] init];
     
     if ([NSProcessInfo instancesRespondToSelector:@selector(isOperatingSystemAtLeastVersion:)] || (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad)) {
         // using UISplitVC for iOS8 and iPad on iOS7
@@ -56,6 +55,15 @@
     UINavigationController *masterNavVC = [[UINavigationController alloc] initWithRootViewController:self.masterVC];
     
     self.rootVC = masterNavVC;
+}
+
+- (void)openContact:(EAContact *)contact {
+    [self.detailVC setContact:contact];
+    if([self.rootVC isKindOfClass:[UINavigationController class]]) {
+        [(UINavigationController *)self.rootVC pushViewController:self.detailVC animated:YES];
+    } else {
+        [(UISplitViewController *)self.rootVC showDetailViewController:self.detailVC sender:self];
+    }
 }
 
 #pragma mark - UISplitViewController delegate
