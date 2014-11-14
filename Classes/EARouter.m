@@ -2,7 +2,10 @@
 
 #import "EARouter.h"
 
-@implementation EARouter
+@implementation EARouter {
+    UINavigationController *masterNavVC;
+    UINavigationController *detailNavVC;
+}
 
 #pragma mark - Singleton logic
 
@@ -38,8 +41,8 @@
 - (void)setupSplitVC {
     UISplitViewController *splitViewController = [[UISplitViewController alloc] init];
     
-    UINavigationController *masterNavVC = [[UINavigationController alloc] initWithRootViewController:self.masterVC];
-    UINavigationController *detailNavVC = [[UINavigationController alloc] initWithRootViewController:self.detailVC];
+    masterNavVC = [[UINavigationController alloc] initWithRootViewController:self.masterVC];
+    detailNavVC = [[UINavigationController alloc] initWithRootViewController:self.detailVC];
     
     splitViewController.viewControllers = @[masterNavVC, detailNavVC];
     splitViewController.delegate = self;
@@ -52,7 +55,7 @@
 }
 
 - (void)setupNavVC {
-    UINavigationController *masterNavVC = [[UINavigationController alloc] initWithRootViewController:self.masterVC];
+    masterNavVC = [[UINavigationController alloc] initWithRootViewController:self.masterVC];
     
     self.rootVC = masterNavVC;
 }
@@ -62,7 +65,7 @@
     if([self.rootVC isKindOfClass:[UINavigationController class]]) {
         [(UINavigationController *)self.rootVC pushViewController:self.detailVC animated:YES];
     } else {
-        [(UISplitViewController *)self.rootVC showDetailViewController:self.detailVC sender:self];
+        [(UISplitViewController *)self.rootVC showDetailViewController:detailNavVC sender:self];
     }
 }
 

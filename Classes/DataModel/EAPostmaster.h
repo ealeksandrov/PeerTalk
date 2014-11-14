@@ -22,6 +22,7 @@
 - (void)startWorking;
 - (void)stopWorking;
 
+- (void)sendMessage:(NSString *)messageStr toContactWithId:(NSString *)contactId;
 - (void)deleteContact:(EAContact *)contact;
 
 @end

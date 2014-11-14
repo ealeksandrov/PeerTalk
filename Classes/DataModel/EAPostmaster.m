@@ -32,7 +32,6 @@ static NSString * const localContactIdKey = @"localContactId";
 - (instancetype)initUniqueInstance {
     self.localContactId = [[NSUserDefaults standardUserDefaults] valueForKey:localContactIdKey];
     if(!self.localContactId) {
-        DDLogError(@"NEW UDID HERE");
         self.localContactId = [[NSUUID UUID] UUIDString];
         [[NSUserDefaults standardUserDefaults] setValue:self.localContactId forKey:localContactIdKey];
         [[NSUserDefaults standardUserDefaults] synchronize];
@@ -78,7 +77,17 @@ static NSString * const localContactIdKey = @"localContactId";
 }
 
 - (void)sendMessage:(NSString *)messageStr toContactWithId:(NSString *)contactId {
+#warning Send dictionary with text, id, messageType, etc
+    [MagicalRecord saveWithBlockAndWait:^(NSManagedObjectContext *localContext) {
+        EAMessage *msg = [EAMessage MR_createEntity];
+        msg.messageId = [[NSUUID UUID] UUIDString];
+        msg.time = [NSDate date];
+        msg.contact = [EAContact MR_findFirstByAttribute:contactIdKey withValue:contactId];
+        msg.isRecieved = @(NO);
+        msg.message = messageStr;
+    }];
     
+    [self.manager sendMessage:messageStr toContactWithId:contactId];
 }
 
 - (void)deleteContact:(EAContact *)contact {
@@ -112,6 +121,15 @@ static NSString * const localContactIdKey = @"localContactId";
 }
 
 - (void)manager:(EAMultipeerManager *)manager recievedMessage:(NSString *)message fromPeerWithId:(NSString *)contactId {
+    [MagicalRecord saveWithBlockAndWait:^(NSManagedObjectContext *localContext) {
+        EAMessage *msg = [EAMessage MR_createEntity];
+        msg.messageId = [[NSUUID UUID] UUIDString];
+        msg.time = [NSDate date];
+        msg.contact = [EAContact MR_findFirstByAttribute:contactIdKey withValue:contactId];
+        msg.isRecieved = @(YES);
+        msg.message = message;
+    }];
+    
     [self.delegate postmaster:self recievedMessage:message fromPeer:[EAContact MR_findFirstByAttribute:contactIdKey withValue:contactId]];
 }
 

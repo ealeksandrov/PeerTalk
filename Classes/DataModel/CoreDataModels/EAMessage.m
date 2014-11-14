@@ -16,7 +16,7 @@
 #pragma mark - JSQMessageData
 
 - (NSString *)senderId {
-    if(self.isRecieved) {
+    if(self.isRecievedValue) {
         return self.contact.contactId;
     } else {
         return [EAPostmaster sharedInstance].localContactId;
@@ -24,7 +24,7 @@
 }
 
 - (NSString *)senderDisplayName {
-    if(self.isRecieved) {
+    if(self.isRecievedValue) {
         return self.contact.displayName;
     } else {
         return @"Me";

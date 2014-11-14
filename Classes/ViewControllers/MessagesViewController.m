@@ -23,6 +23,8 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    self.inputToolbar.contentView.textView.userInteractionEnabled = NO;
+    
     self.senderId = [EAPostmaster sharedInstance].localContactId;
     self.senderDisplayName = @"Me";
     
@@ -46,16 +48,9 @@
          senderDisplayName:(NSString *)senderDisplayName
                       date:(NSDate *)date {
     [JSQSystemSoundPlayer jsq_playMessageSentSound];
-
-#warning Send message here
-
-//    JSQMessage *message = [[JSQMessage alloc] initWithSenderId:senderId
-//                                             senderDisplayName:senderDisplayName
-//                                                          date:date
-//                                                          text:text];
-//    
-//    
-//  [self.demoData.messages addObject:message];
+    
+    [[EAPostmaster sharedInstance] sendMessage:text toContactWithId:self.contact.contactId];
+    
     [self finishSendingMessage];
 }
 
@@ -89,7 +84,7 @@
 
 - (NSAttributedString *)collectionView:(JSQMessagesCollectionView *)collectionView attributedTextForCellBottomLabelAtIndexPath:(NSIndexPath *)indexPath {
 #warning Delivered/read status
-    return [[NSAttributedString alloc] initWithString:@"Delivered"];
+    return nil;
 }
 
 #pragma mark - UICollectionView DataSource
@@ -129,27 +124,7 @@
 - (CGFloat)collectionView:(JSQMessagesCollectionView *)collectionView
                    layout:(JSQMessagesCollectionViewFlowLayout *)collectionViewLayout heightForCellBottomLabelAtIndexPath:(NSIndexPath *)indexPath {
 #warning Delivered/read status
-    return 10.0f;
-}
-
-- (NSFetchedResultsController *)fetchedResultsController {
-    if(!_fetchedResultsController) {
-        NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] initWithEntityName:[EAMessage entityName]];
-        [fetchRequest setPredicate:[NSPredicate predicateWithFormat:@"contact == %@",self.contact]];
-        [fetchRequest setSortDescriptors:@[[NSSortDescriptor sortDescriptorWithKey:@"time" ascending:YES]]];
-        _fetchedResultsController = [[NSFetchedResultsController alloc] initWithFetchRequest:fetchRequest managedObjectContext:[[MagicalRecordStack defaultStack] context] sectionNameKeyPath:nil cacheName:nil];
-        [_fetchedResultsController setDelegate:self];
-        
-        NSError *error = nil;
-        [_fetchedResultsController performFetch:&error];
-        
-        if (error) {
-            DDLogError(@"Unable to perform fetch.");
-            DDLogError(@"%@, %@", error, error.localizedDescription);
-        }
-    }
-    
-    return _fetchedResultsController;
+    return 0.0f;
 }
 
 #pragma mark - NSFetchedResultsController delegate
@@ -193,13 +168,37 @@
     }
 }
 
-#pragma mark - Custom setters
+#pragma mark - Custom accessors
+
+- (NSFetchedResultsController *)fetchedResultsController {
+    if(!_fetchedResultsController) {
+        NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] initWithEntityName:[EAMessage entityName]];
+        [fetchRequest setPredicate:[NSPredicate predicateWithFormat:@"contact == %@",self.contact]];
+        [fetchRequest setSortDescriptors:@[[NSSortDescriptor sortDescriptorWithKey:@"time" ascending:YES]]];
+        _fetchedResultsController = [[NSFetchedResultsController alloc] initWithFetchRequest:fetchRequest managedObjectContext:[[MagicalRecordStack defaultStack] context] sectionNameKeyPath:nil cacheName:nil];
+        [_fetchedResultsController setDelegate:self];
+        
+        NSError *error = nil;
+        [_fetchedResultsController performFetch:&error];
+        
+        if (error) {
+            DDLogError(@"Unable to perform fetch.");
+            DDLogError(@"%@, %@", error, error.localizedDescription);
+        }
+    }
+    
+    return _fetchedResultsController;
+}
 
 - (void)setContact:(EAContact *)contact {
+    if(_contact) {
+        [[EAMultipeerManager sharedInstance] disconnectContactWithId:contact.contactId];
+    }
     _contact = contact;
-    
+    [[EAMultipeerManager sharedInstance] connectContactWithId:contact.contactId];
     self.fetchedResultsController = nil;
     [self.collectionView reloadData];
+    self.inputToolbar.contentView.textView.userInteractionEnabled = YES;
 }
 
 @end
