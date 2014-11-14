@@ -83,7 +83,7 @@ static NSString * const localContactIdKey = @"localContactId";
         msg.messageId = [[NSUUID UUID] UUIDString];
         msg.time = [NSDate date];
         msg.contact = [EAContact MR_findFirstByAttribute:contactIdKey withValue:contactId];
-        msg.isRecieved = @(NO);
+        msg.senderId = self.localContactId;
         msg.message = messageStr;
     }];
     
@@ -126,7 +126,7 @@ static NSString * const localContactIdKey = @"localContactId";
         msg.messageId = [[NSUUID UUID] UUIDString];
         msg.time = [NSDate date];
         msg.contact = [EAContact MR_findFirstByAttribute:contactIdKey withValue:contactId];
-        msg.isRecieved = @(YES);
+        msg.senderId = contactId;
         msg.message = message;
     }];
     

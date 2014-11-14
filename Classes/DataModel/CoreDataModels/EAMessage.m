@@ -1,6 +1,5 @@
 #import "EAMessage.h"
 #import "EAContact.h"
-#import "EAPostmaster.h"
 
 @interface EAMessage ()
 
@@ -12,19 +11,10 @@
 
 // Custom logic goes here.
 
-#warning Bad style, strong coupling
 #pragma mark - JSQMessageData
 
-- (NSString *)senderId {
-    if(self.isRecievedValue) {
-        return self.contact.contactId;
-    } else {
-        return [EAPostmaster sharedInstance].localContactId;
-    }
-}
-
 - (NSString *)senderDisplayName {
-    if(self.isRecievedValue) {
+    if(self.contact.contactId == self.senderId) {
         return self.contact.displayName;
     } else {
         return @"Me";

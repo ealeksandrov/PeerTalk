@@ -4,9 +4,9 @@
 #import "_EAMessage.h"
 
 const struct EAMessageAttributes EAMessageAttributes = {
-	.isRecieved = @"isRecieved",
 	.message = @"message",
 	.messageId = @"messageId",
+	.senderId = @"senderId",
 	.time = @"time",
 };
 
@@ -40,38 +40,14 @@ const struct EAMessageRelationships EAMessageRelationships = {
 + (NSSet*)keyPathsForValuesAffectingValueForKey:(NSString*)key {
 	NSSet *keyPaths = [super keyPathsForValuesAffectingValueForKey:key];
 
-	if ([key isEqualToString:@"isRecievedValue"]) {
-		NSSet *affectingKey = [NSSet setWithObject:@"isRecieved"];
-		keyPaths = [keyPaths setByAddingObjectsFromSet:affectingKey];
-		return keyPaths;
-	}
-
 	return keyPaths;
-}
-
-@dynamic isRecieved;
-
-- (BOOL)isRecievedValue {
-	NSNumber *result = [self isRecieved];
-	return [result boolValue];
-}
-
-- (void)setIsRecievedValue:(BOOL)value_ {
-	[self setIsRecieved:[NSNumber numberWithBool:value_]];
-}
-
-- (BOOL)primitiveIsRecievedValue {
-	NSNumber *result = [self primitiveIsRecieved];
-	return [result boolValue];
-}
-
-- (void)setPrimitiveIsRecievedValue:(BOOL)value_ {
-	[self setPrimitiveIsRecieved:[NSNumber numberWithBool:value_]];
 }
 
 @dynamic message;
 
 @dynamic messageId;
+
+@dynamic senderId;
 
 @dynamic time;
 

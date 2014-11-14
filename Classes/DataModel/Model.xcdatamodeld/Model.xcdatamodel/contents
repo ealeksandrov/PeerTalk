@@ -8,9 +8,9 @@
         <relationship name="messages" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="EAMessage" inverseName="contact" inverseEntity="EAMessage" syncable="YES"/>
     </entity>
     <entity name="EAMessage" representedClassName="EAMessage" syncable="YES">
-        <attribute name="isRecieved" optional="YES" attributeType="Boolean" syncable="YES"/>
         <attribute name="message" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="messageId" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="senderId" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="time" optional="YES" attributeType="Date" syncable="YES"/>
         <relationship name="contact" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="EAContact" inverseName="messages" inverseEntity="EAContact" syncable="YES"/>
     </entity>
